@@ -30,8 +30,6 @@ def run_game():
             if bullet.rect.bottom <= 0:
                 bullets.remove(bullet)
 
-        print(len(bullets))
-
         gf.update_screen(ai_settings, screen, ship, bullets)
 
 
