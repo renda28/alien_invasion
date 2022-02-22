@@ -3,7 +3,7 @@ import sys
 import pygame
 
 
-def check_events(ship):
+def check_events(ai_settings, screen, ship, bullets):
     """Respond to keypresses and mouse events."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -36,7 +36,7 @@ def check_keyup_events(event, ship):
         ship.moving_left = False
 
 
-def update_screen(ai_settings, screen, ship):
+def update_screen(ai_settings, screen, ship, bullets):
     """Update images on the screen and flip to the new screen"""
     screen.fill(ai_settings.bg_color)
     ship.blitme()
