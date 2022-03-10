@@ -6,21 +6,19 @@ from bullet import Bullet
 from alien import Alien
 
 
-def check_events(ai_settings, screen, stats, play_button, ship, bullets):
+def check_events(ai_settings, screen, stats, play_button, ship, aliens, bullets):
     """Respond to keypresses and mouse events."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-
         elif event.type == pygame.KEYDOWN:
             check_keydown_events(event, ai_settings, screen, ship, bullets)
-
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
-
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(stats, play_button, mouse_x, mouse_y)
+            check_play_button(ai_settings, screen, stats,
+                              play_button, ship, aliens, bullets, mouse_x, mouse_y)
 
 
 def check_keydown_events(event, ai_settings, screen, ship, bullets):
@@ -28,15 +26,12 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
     if event.key == pygame.K_RIGHT:
         # Move the ship to the right.
         ship.moving_right = True
-
     elif event.key == pygame.K_LEFT:
         # Move the ship to the right.
         ship.moving_left = True
-
     elif event.key == pygame.K_SPACE:
         # Create a new bullet and add it to the bullets group.
         fire_bullet(ai_settings, screen, ship, bullets)
-
     # Exit game when q is pressed
     elif event.key == pygame.K_q:
         sys.exit()
@@ -203,7 +198,17 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
     check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
 
 
-def check_play_button(stats, play_button, mouse_x, mouse_y):
+def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y):
     """Start a new game when the player clicks Play."""
     if play_button.rect.collidepoint(mouse_x, mouse_y):
+        # Reset the game statistics.
+        stats.reset_stats()
         stats.game_active = True
+
+        # Empty the list of aliens and bullets.
+        aliens.empty()
+        bullets.empty()
+
+        # Create a new fleet and center the ship.
+        create_fleet(ai_settings, screen, ship, aliens)
+        ship.center_ship()
