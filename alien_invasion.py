@@ -20,7 +20,7 @@ def run_game():
     # Make the play button.
     play_button = Button(ai_settings, screen, "Play")
 
-    # Make a high score store
+    # create an instance to record all time high scores
     store = Store()
 
     # Create an instance to store game statistics and create a scoreboard.
