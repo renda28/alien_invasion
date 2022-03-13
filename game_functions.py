@@ -6,13 +6,15 @@ from bullet import Bullet
 from alien import Alien
 
 
-def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets):
+def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bullets, store):
     """Respond to keypresses and mouse events."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            high_score_store.save_high_score(stats)
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_keydown_events(event, ai_settings, screen, ship, bullets)
+            check_keydown_events(event, ai_settings,
+                                 screen, stats, ship, bullets, store)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -21,7 +23,7 @@ def check_events(ai_settings, screen, stats, sb, play_button, ship, aliens, bull
                               play_button, ship, aliens, bullets, mouse_x, mouse_y)
 
 
-def check_keydown_events(event, ai_settings, screen, ship, bullets):
+def check_keydown_events(event, ai_settings, screen, stats, ship, bullets, store):
     # Respond to keypresses.
     if event.key == pygame.K_RIGHT:
         # Move the ship to the right.
@@ -34,6 +36,7 @@ def check_keydown_events(event, ai_settings, screen, ship, bullets):
         fire_bullet(ai_settings, screen, ship, bullets)
     # Exit game when q is pressed
     elif event.key == pygame.K_q:
+        store.save_high_score(stats)
         sys.exit()
 
 
