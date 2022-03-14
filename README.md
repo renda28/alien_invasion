@@ -11,5 +11,5 @@ the player’s ship or reaches the bottom of the screen, the player
 loses a ship. If the player loses three ships, the game ends.
 
 ## Setup
-
-run the file alien_invasion.py
+1. install pygame
+2. run the file alien_invasion.py
