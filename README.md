@@ -8,7 +8,7 @@ A game where the player controls a ship and shoots down aliens.
 
 # Features
 
-- the player controls a ship that appears at
+- The player controls a ship that appears at
   the bottom center of the screen.
 - The player can move the ship
   right and left using the arrow keys
