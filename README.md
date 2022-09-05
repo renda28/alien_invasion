@@ -27,8 +27,8 @@ A game where the player controls a ship and shoots down aliens.
 
 # How to use
 
-- git clone https://github.com/renda28/alien_invasion.git
-- python alien_invasion.py
+1. git clone https://github.com/renda28/alien_invasion.git
+2. python alien_invasion.py
 
 # Technologies
 
